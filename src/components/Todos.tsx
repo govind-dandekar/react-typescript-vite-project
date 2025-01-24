@@ -2,6 +2,8 @@ import React from "react";
 import Todo from "../models/todo";
 import TodoItem from "./TodoItem";
 
+
+import classes from './Todos.module.css';
 // props is an object that has k-v pairs but also has children
 // functional components like props can be generic
 // can define explicitly own props that should be combined into
@@ -14,7 +16,7 @@ import TodoItem from "./TodoItem";
 // can make props optional with ? "items?: string[]"
 const Todos: React.FC<{items: Todo[]}> = (props) => {
 	return( 
-		<ul>
+		<ul className={classes.todos}>
 			{props.items.map(item => <TodoItem key={item.id} text={item.text}/>)}
 		</ul>
 	)
