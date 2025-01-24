@@ -1,14 +1,28 @@
+import { useState } from 'react';
+
 import Todos from './components/Todos';
 import Todo from './models/todo';
+import NewTodo from './components/NewTodo';
 
 function App() {
-  const todos = [
-    new Todo('Learn React'),
-    new Todo('Learn TypeScript')
-  ];
+
+  // ts cant infer values of empty array
+  // useState is a generic fx
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const addTodoHandler = (todoText: string) => {
+    const newTodo = new Todo(todoText);
+    
+    setTodos((prevTodos) => {
+      return [newTodo, ...prevTodos]
+    })
+  }
 
   return (
     <div>
+      <NewTodo 
+        onAddTodo={addTodoHandler}
+      />
       <Todos 
         items={todos}
       />

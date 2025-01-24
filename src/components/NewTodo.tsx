@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
-const NewTodo = () => {
+// () => describes a type of function (param: type) => return type
+const NewTodo: React.FC<{onAddTodo: (text: string) => void }> = (props) => {
 
 	// ts has no idea that this will be connected to input element
 	// when useRef() is called; set generic type; have to set default
@@ -10,9 +11,16 @@ const NewTodo = () => {
 	const submitHandler = (event: React.FormEvent) => {
 		event.preventDefault();
 	
-		// ? in case value is null; inferred type is string | undefined
-		const enteredText = todoTextInputRef.current?.value
-	
+		// current? in case value is null; inferred type is string | undefined
+		// can use ! if you know that value can never be null; type is string
+		const enteredText = todoTextInputRef.current!.value;
+
+		if (enteredText.trim().length === 0){
+			// throw an error
+			return;
+		}
+
+		props.onAddTodo(enteredText);
 	};
 
 	return (
