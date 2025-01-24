@@ -1,5 +1,3 @@
-import Todo from '../models/todo';
-
 import classes from './TodoItem.module.css'
 
 // optional onRemoveTodo(event: React.MouseEvent)
