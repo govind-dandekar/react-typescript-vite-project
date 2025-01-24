@@ -14,10 +14,17 @@ import classes from './Todos.module.css';
 // define own props and types in <{}>; need to tell ts how to treat fx
 // internally (diff from standard ts fx declaration)
 // can make props optional with ? "items?: string[]"
-const Todos: React.FC<{items: Todo[]}> = (props) => {
+const Todos: React.FC<{items: Todo[], onRemoveTodo: (id: string) => void }> = (props) => {
+	
 	return( 
 		<ul className={classes.todos}>
-			{props.items.map(item => <TodoItem key={item.id} text={item.text}/>)}
+			{props.items.map(item => 
+				<TodoItem 
+					key={item.id} 
+					text={item.text}
+					onRemoveTodo={() => props.onRemoveTodo(item.id)}
+				/>
+				)}
 		</ul>
 	)
 }

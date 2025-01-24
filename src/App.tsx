@@ -18,6 +18,12 @@ function App() {
     })
   }
 
+  const removeTodoHandler = (todoId: string) => {
+    setTodos((prevTodos  => {
+      return prevTodos.filter(todo => todo.id !== todoId)
+    }))
+  }
+
   return (
     <div>
       <NewTodo 
@@ -25,6 +31,7 @@ function App() {
       />
       <Todos 
         items={todos}
+        onRemoveTodo={removeTodoHandler}
       />
     </div>
   )
